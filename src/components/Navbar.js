@@ -2,10 +2,9 @@ import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-const NavigationBar = () => {
+const NavigationBar = ({ cartCount }) => {
   return (
     <>
-      {/* ✅ Custom CSS inside component */}
       <style>
         {`
           .custom-navbar {
@@ -63,8 +62,9 @@ const NavigationBar = () => {
               <Nav.Link as={NavLink} to="/products" className="nav-link-custom">
                 Products
               </Nav.Link>
+              {/* ✅ Show cart count here */}
               <Nav.Link as={NavLink} to="/cart" className="nav-link-custom">
-                Cart
+                Cart ({cartCount})
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
