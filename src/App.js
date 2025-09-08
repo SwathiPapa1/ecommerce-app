@@ -24,9 +24,8 @@ const App = () => {
       return [...prev, { ...product, quantity: 1 }];
     });
 
-    // ✅ show success message (use product.title)
     setMessage(`✅ ${product.title} added to cart!`);
-    setTimeout(() => setMessage(""), 3000); // auto-hide in 3s
+    setTimeout(() => setMessage(""), 3000);
   };
 
   const increaseQuantity = (id) => {
@@ -47,12 +46,16 @@ const App = () => {
     setCartItems((prev) => prev.filter((p) => p.id !== id));
   };
 
+  // ✅ calculate total items in cart
+  const getCartCount = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
   return (
     <div className="d-flex flex-column min-vh-100">
-      {/* ✅ Navbar always on top */}
-      <NavigationBar />
+      {/* ✅ Navbar shows cart count */}
+      <NavigationBar cartCount={getCartCount()} />
 
-      {/* ✅ Success message */}
       {message && (
         <Container className="mt-3">
           <Alert variant="success" className="text-center fw-bold">
@@ -61,7 +64,6 @@ const App = () => {
         </Container>
       )}
 
-      {/* ✅ Main content expands */}
       <div className="flex-grow-1">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -82,7 +84,6 @@ const App = () => {
         </Routes>
       </div>
 
-      {/* ✅ Footer always at bottom */}
       <Footer />
     </div>
   );
